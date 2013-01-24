@@ -10,7 +10,7 @@ fpath = raw_input('> image\'s full path:')
 try:
    with open(fpath) as f: pass
 except IOError as e:
-   print (fname + ' could not be opened')
+   print (fpath + ' could not be opened')
 
 # reads the image using ndimage.imread()...
 print ('\treading image...')
