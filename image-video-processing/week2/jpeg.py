@@ -82,9 +82,7 @@ print ('************************************************************************
 print ('* Basic JPEG implementation                                                    *')
 print ('********************************************************************************')
 
-fpath = 'D:\python\workspace\lena_128x128.bmp'
-# fpath = 'D:\python\workspace\lena_512x512.bmp'
-# fpath = raw_input('> image\'s full path:')
+fpath = raw_input('> image\'s full path:')
 try:
    with open(fpath) as f: pass
 except IOError as e:
