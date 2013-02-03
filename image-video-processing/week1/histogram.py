@@ -5,25 +5,20 @@ import pylab
 print ('********************************************************************************')
 print ('* Building a histogram using SciPy, NumPy and Pylab                            *')
 print ('********************************************************************************')
+import sys
+sys.path.append('../utils')
+import userinput
+fpath = userinput.get_img_path()
+img_array = userinput.get_gray_img(fpath)
 
-fpath = raw_input('> image\'s full path:')
-try:
-   with open(fpath) as f: pass
-except IOError as e:
-   print (fpath + ' could not be opened')
-
-# reads the image using ndimage.imread()...
-print ('\treading image...')
-img = ndimage.imread(fpath)
-img_array = numpy.array(img)
 
 # builds the histogram using ndimage.histogram()...
-print ('\tbuilding histogram...')
+print ('building histogram...')
 bins_count = 256
 histogram = ndimage.histogram(img_array, 0, 255, bins_count)
 
 # plots the histogram using pylab...
-print ('\tploting histogram...')
+print ('ploting histogram...')
 x_label = 'pixel'
 y_label = 'number of pixels'
 pylab.plot(histogram)
@@ -32,10 +27,10 @@ pylab.axes().set_xlabel(x_label)
 pylab.axes().set_ylabel(y_label)
 
 hpath = fpath + '-histogram.png'
-print ('\tsaving histogram to file \'' + hpath + '\'...')
+print ('saving histogram to file \'' + hpath + '\'...')
 pylab.savefig(fpath + '-histogram.png', format='png')
 
-print ('\tshowing histogram...')
+print ('showing histogram...')
 pylab.show()
 
 print ('********************************************************************************')

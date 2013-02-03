@@ -1,9 +1,11 @@
+from matplotlib import pyplot
+from numpy.core.numeric import zeros
+from numpy.ma.core import floor_divide
 from scipy import ndimage
 import numpy
 import pylab
-from numpy.ma.core import floor_divide
-from numpy.core.numeric import zeros
-from matplotlib import pyplot
+from scipy.misc.pilutil import imsave
+import os
 
 def dumb_average(img_array = None, neighbor_count = None):
     
@@ -25,25 +27,17 @@ def dumb_average(img_array = None, neighbor_count = None):
 print ('********************************************************************************')
 print ('* Performing a neighborhood avarage                                            *')
 print ('********************************************************************************')
-
-fpath = raw_input('> image\'s full path:')
-try:
-   with open(fpath) as f: pass
-except IOError as e:
-   print (fpath + ' could not be opened')
-
-# reads the image using ndimage.imread()...
-print ('\treading image...')
-img = ndimage.imread(fpath)
-img_array = numpy.array(img)
+import sys
+sys.path.append('../utils')
+import userinput
+fpath = userinput.get_img_path()
+img_array = userinput.get_gray_img(fpath)
 
 for neighbor in [3, 10, 20]:
-    
-    print ('\tbuilding new image using \'' + str(neighbor) + '\' neighbors avarage...')
+    print ('building new image using \'' + str(neighbor) + '\' neighbors avarage...')
     new_img_array = dumb_average(img_array, neighbor)
-    
-    new_fpath = '%s-%s.jpg' % (fpath, str(neighbor))
-    print ('\t\tsaving new image to \'' + new_fpath + '\'...')
-    pyplot.imsave(new_fpath, new_img_array, cmap='gray', format='png')
+    new_fpath = '%s/%i-neighbors-%s' % (os.path.dirname(fpath), neighbor, os.path.basename(fpath))
+    print ('saving new image to \'' + new_fpath + '\'...')
+    imsave(new_fpath, new_img_array)
     
 print ('********************************************************************************')
