@@ -81,13 +81,6 @@ def fill_y_borders(expanded_array, y_start, last_x):
 print ('********************************************************************************')
 print ('* Basic JPEG implementation                                                    *')
 print ('********************************************************************************')
-
-fpath = raw_input('> image\'s full path:')
-try:
-   with open(fpath) as f: pass
-except IOError as e:
-   print (fpath + ' could not be opened')
-
 img_array = [[]]
 expanded_array = [[]]
 quantized_array = [[]]
@@ -96,14 +89,11 @@ dequantized_array = [[]]
 idct_array = [[]]
 error_array = [[]]
 
-# reads the image using ndimage.imread()...
-print ('reading image...') 
-img = ndimage.imread(fpath)
-img_array = numpy.array(img)
-shape_len = len(img_array.shape)
-if (shape_len != 2): 
-    print ('\tunsupported image (shape len should be 2)...')
-    quit()
+import sys
+sys.path.append('../utils')
+import userinput
+fpath = userinput.get_img_path()
+img_array = userinput.get_gray_img(fpath)
 (img_array_x_len, img_array_y_len) = img_array.shape
 #    
 #img_array = zeros((8, 8))
