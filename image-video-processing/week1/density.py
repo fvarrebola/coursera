@@ -24,5 +24,5 @@ for intensity in intensities:
     new_fpath = '%s/%i-intensity-%s' % (os.path.dirname(fpath), intensity, os.path.basename(fpath))
     print ('saving new image to \'' + new_fpath + '\'...')
     imsave(new_fpath, new_img_array)
-
+    
 print ('********************************************************************************')
