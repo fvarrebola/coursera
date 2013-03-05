@@ -130,7 +130,8 @@ def main():
 
     usage()
     
-    if len(sys.argv) != 3:
+    argv_len = len(sys.argv)
+    if (argv_len < 3 or argv_len > 4):
         return
 
     state_str = sys.argv[1]
